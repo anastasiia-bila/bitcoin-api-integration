@@ -29,11 +29,9 @@ class BitcoinAPIIntegration(object):
         for i in range(len(self.forecast)):
             if 'timestamp' in self.forecast[i].keys():
                 temp = self.forecast[i].get('timestamp')
+                # date = datetime.strptime(temp[:10], '%Y-%m-%d').date()
                 timestamp_list.append(temp[:10])  # Timestamp was not parsable by Python datetime library, so I worked with date as with a string
 
+
+
         return timestamp_list
-
-
-bitcoin_integration = BitcoinAPIIntegration()
-print(bitcoin_integration.get_bitcoin_forecast_in_usd())
-print(bitcoin_integration.get_bitcoin_forecast_dates())

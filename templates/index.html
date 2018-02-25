@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="favicon.ico" />  
+</head>
+
+  <body>
+    
+    <div class="container">
+    <div class="chart-container row">
+    <canvas id="myChart"></canvas>
+</div>
+</div>
+
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: {{ labels | safe }},
+        datasets: [{
+            label: 'Bitcoin forecast ',
+            data: {{ data }},
+            backgroundColor: [
+                'rgba(255, 255, 255, 0.2)'
+            ], 
+            borderColor: [
+                'rgba(255,99,132,1)'
+            ],
+            borderWidth: 1 
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+		    
+		    callback: function(value, index, values) {
+                        return '$' + value;
+
+                    }
+		},
+		scaleLabel: {
+		    display: true,
+		    labelString: 'Forecasted price for 1 bitcoin (in dollars, $)'
+				    
+                }
+            }],
+	    xAxes: [{
+		scaleLabel: {
+		    display: true,
+		    labelString: 'Date (in YYYY-MM-DD format)'
+				    
+                }
+            }]
+        }
+    }
+});
+</script>
+
+  </body>
+</html>
