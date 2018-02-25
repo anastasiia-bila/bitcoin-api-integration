@@ -1,1 +1,1 @@
-web: gunicorn WeatherAPIIntegration:app
+web: gunicorn BitcoinAPIIntegration:app
